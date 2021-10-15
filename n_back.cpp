@@ -1,4 +1,4 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <bangtal>
 #include <cstdlib>
@@ -6,7 +6,7 @@
 
 using namespace bangtal;
 
-TimerPtr timer, timer_inst;
+TimerPtr timer1, timer2, timer_inst;
 ScenePtr scene = Scene::create("N_Back Game", "Images/background.png");
 ObjectPtr start1 = 0;
 ObjectPtr start2 = 0;
@@ -75,21 +75,21 @@ void makearray_start() {
 	printf("\n\n");
 
 	trial = 20;
-	timer->set(3.0f); timer->start();
+	timer1->set(3.0f); timer1->start();
 }
 
 void makeresult() {
 	if (choose_num == 2)
 	{
 		num_right = 0;
-		printf("Correct Answer is :\n");
+		printf("Correct Answer is :\n\n");
 		for (int i = 2; i < 20; i++)
 		{
 			if (arr_20[i] == arr_20[i - 2])
 				result_true[i - 2] = 1;
 			else
 				result_true[i - 2] = 2;
-			printf(" %d ", result_true[i-2]);
+			printf(" %d ", result_true[i - 2]);
 		} // result_true 에 0~17 값이 저장된다.
 		printf("\nYour Answer is :\n");
 		for (int i = 0; i < 35; i++)
@@ -113,14 +113,14 @@ void makeresult() {
 	if (choose_num == 3)
 	{
 		num_right = 0;
-		printf("Correct Answer is :\n");
+		printf("Correct Answer is :\n\n");
 		for (int i = 3; i < 20; i++)
 		{
 			if (arr_20[i] == arr_20[i - 3])
 				result_true[i - 3] = 1;
 			else
 				result_true[i - 3] = 2;
-			printf(" %d ", result_true[i-3]);
+			printf(" %d ", result_true[i - 3]);
 		} // result_true 에 0~16 값이 저장된다.
 		printf("\nYour Answer is :\n");
 		for (int i = 0; i < 33; i++)
@@ -169,18 +169,22 @@ void init_game()
 		}
 		return true;
 		});
-	timer = Timer::create(3.0f);
-	timer->setOnTimerCallback([&](auto)->bool {
+	
+	timer1 = Timer::create(3.0f);
+	timer1->setOnTimerCallback([&](auto)->bool {
 		if (trial > 0) {
-			timer->set(3.0f);
-			timer->start();
-			if (trial != 20)
-			{
-				placement[arr_20[20 - trial - 1]]->show();
-			}
+			timer1->set(3.0f);
+			timer1->start();
 			placement[arr_20[20 - trial]]->hide();
+			timer2->set(1.0f); timer2->start();
 		}
 		trial--;
+		return true;
+		});
+
+	timer2 = Timer::create(1.0f);
+	timer2->setOnTimerCallback([&](auto)->bool {
+		placement[arr_20[20 - trial - 1]]->show();
 		return true;
 		});
 
@@ -219,6 +223,7 @@ int main() {
 		placement[i]->setScale(0.75);
 		placement[i]->hide();
 	};
+	
 	song = Sound::create("Sound/x-mas.mp3"); song->play(true);
 	song_object();
 
@@ -226,6 +231,6 @@ int main() {
 	setGameOption(GameOption::GAME_OPTION_MESSAGE_BOX_BUTTON, false);
 
 	init_game();
-	
+
 	return 0;
 }
