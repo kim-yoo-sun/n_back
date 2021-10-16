@@ -57,4 +57,6 @@
 
 ------------------------------------------------------------------------------------------
 해당 게임은 Apache-2.0 License 를 적용합니다.
-![N-back](https://user-images.githubusercontent.com/87100682/137311037-e4f3ff14-a1c4-4638-972e-a887a3722aa8.PNG)
+![N-back-1](https://user-images.githubusercontent.com/87100682/137590561-712d7a32-a431-4cfc-b5d5-2b2223ed5180.PNG)
+![N-back-2](https://user-images.githubusercontent.com/87100682/137590563-70c56870-afbb-4810-aa3a-71c2c6cf1bfb.PNG)
+------------------------------------------------------------------------------------------
