@@ -55,7 +55,8 @@ void makearray_start() {
 	printf("\n\n\n");
 
 	srand((unsigned int)time(NULL));
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < 20; i++)
+	{
 		arr_20[i] = rand() % 12;
 		if (i > 3)
 		{
@@ -70,15 +71,19 @@ void makearray_start() {
 					arr_20[i] = arr_20[i - 3];
 			}
 		}
-		printf("%d ", arr_20[i] + 1);
 	}
-	printf("\n\n");
 
 	trial = 20;
 	timer1->set(3.0f); timer1->start();
 }
 
 void makeresult() {
+	for (int i = 0; i < 20; i++)
+	{
+		printf("%d ", arr_20[i] + 1);
+	}
+	printf("\n\n");
+
 	if (choose_num == 2)
 	{
 		num_right = 0;
@@ -91,6 +96,7 @@ void makeresult() {
 				result_true[i - 2] = 2;
 			printf(" %d ", result_true[i - 2]);
 		} // result_true 에 0~17 값이 저장된다.
+	
 		printf("\nYour Answer is :\n");
 		for (int i = 0; i < 35; i++)
 		{
@@ -110,6 +116,7 @@ void makeresult() {
 		sprintf(message_in, "Your score is %d out of 18 !!!", num_right);
 		showMessage(message_in);
 	}
+
 	if (choose_num == 3)
 	{
 		num_right = 0;
@@ -169,7 +176,7 @@ void init_game()
 		}
 		return true;
 		});
-	
+
 	timer1 = Timer::create(3.0f);
 	timer1->setOnTimerCallback([&](auto)->bool {
 		if (trial > 0) {
@@ -223,7 +230,7 @@ int main() {
 		placement[i]->setScale(0.75);
 		placement[i]->hide();
 	};
-	
+
 	song = Sound::create("Sound/x-mas.mp3"); song->play(true);
 	song_object();
 
